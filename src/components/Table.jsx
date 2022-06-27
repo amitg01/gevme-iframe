@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-
-const URL = "https://jsonplaceholder.typicode.com/users";
+import { MAIN_APP_URL, USERS_URL } from "../apis";
 
 const keys = {
   Name: "name",
@@ -20,19 +19,19 @@ const Table = () => {
   }, []);
 
   const getData = () => {
-    fetch(URL)
+    fetch(USERS_URL)
       .then((res) => res.json())
       .then((data) => setUsers(data));
   };
 
   const viewProfile = useCallback((id) => {
     const data = JSON.stringify({ name: "viewProfile", id });
-    window.top.postMessage(data, "http://localhost:3001/");
+    window.top.postMessage(data, MAIN_APP_URL);
   }, []);
 
   const viewPost = useCallback((id) => {
     const data = JSON.stringify({ name: "viewPost", id });
-    window.top.postMessage(data, "http://localhost:3001/");
+    window.top.postMessage(data, MAIN_APP_URL);
   }, []);
 
   const handleAscendingSort = (key) => {
