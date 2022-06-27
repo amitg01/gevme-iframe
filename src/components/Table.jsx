@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { MAIN_APP_URL, USERS_URL } from "../apis";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortUp } from "@fortawesome/free-solid-svg-icons";
+import { faSortDown } from "@fortawesome/free-solid-svg-icons";
+
 const keys = {
   Name: "name",
   "User Name": "username",
@@ -60,17 +64,22 @@ const Table = () => {
 
     return headerElement.map((key, index) => {
       return (
-        <th key={index}>
+        <th key={index} className="icons">
           <span
+            className="icon"
             onClick={() =>
               ascendingKeyClicked && sortingKey === key
                 ? handleDescendingSort(key)
                 : handleAscendingSort(key)
             }
           >
-            {sortingKey === key && ascendingKeyClicked ? "A" : "V"}
-          </span>{" "}
-          {key.toUpperCase()}
+            {sortingKey === key && ascendingKeyClicked ? (
+              <FontAwesomeIcon icon={faSortUp} />
+            ) : (
+              <FontAwesomeIcon icon={faSortDown} />
+            )}
+          </span>
+          <span>{key.toUpperCase()}</span>
         </th>
       );
     });
@@ -107,7 +116,7 @@ const Table = () => {
   return (
     <>
       <h1 id="title">Table</h1>
-      <table id="employee">
+      <table id="users">
         <thead>
           <tr>{renderHeader()}</tr>
         </thead>
