@@ -19,7 +19,7 @@ const Table = () => {
     getData();
   }, []);
 
-  const getData = async () => {
+  const getData = () => {
     fetch(URL)
       .then((res) => res.json())
       .then((data) => setUsers(data));
